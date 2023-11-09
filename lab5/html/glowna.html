@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Content-Language" content="pl" />
+	<meta name="Author" content="Dawid Grabowski" />
+	<link rel="stylesheet" href="css/mystyle.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<title>Filmy Oscarowe</title>
+</head>
+
+<h1>Filmy Oscarowe</h1>
+
+<table>
+    <tr>
+        <td>
+            <p><a href="html/wszystkowszedzienaraz.html"><i><b>Wszystko wszędzie naraz</b></i></a></p>
+			<p><br>Najlepszy film</p>
+			<div id="test1" class="test"><a href="index.php?idp=wszystkowszedzienaraz"><img src="img/wszystkowszedzienaraz.jpg" class="img1" alt="Wszystko wszędzie naraz plakat"></a></div>
+        </td>
+	</tr>	
+	<tr>
+        <td>
+            <p><a href="html/womentalking.html"><i><b>Women Talking</b></i></a></p>
+			<p><br>Najlepszy scenariusz adaptowany</p>
+			<div id="test1" class="test"><a href="index.php?idp=womentalking"><img src="img/womentalking.jpg" class="img1" alt="Women Talking plakat"></a></div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><a href="html/zaklinaczesloni.html"><i><b>Zaklinacze Słoni</b></i></a></p>
+			<p><br>Najlepszy krótkometrażowy film dokumentalny</p>
+			<div id="test1" class="test"><a href="index.php?idp=zakliaczesloni"><img src="img/zaklinaczesloni.jpg" class="img1" alt="Zaklinacze Słoni plakat"></a></div>
+        </td>
+	</tr>	
+	<tr>
+        <td>
+            <p><a href="html/wieloryb.html"><i><b>Wieloryb</b></i></a></p>
+			<p><br>Najlepszą charakteryzację i fryzury</p>
+			<div id="test1" class="test"><a href="index.php?idp=wieloryb"><img src="img/wieloryb.jpg" class="img1" alt="Wieloryb plakat"></a></div>
+        </td>
+    </tr>
+</table>
+
+<u><p><b><i><h3><span style="color:red">Źródło informacji: <a href="https://www.filmweb.pl/awards/Oscary/2023">Filmweb.pl</span></h3></i></b></a></p></u>
+
+	<script>
+	$("#test1 img").on({
+		"mouseover" : function() {
+			$(this).animate({
+				width: "400px",
+			}, 500);
+		},
+		"mouseout" : function() {
+			$(this).animate({
+				width: "300px",
+			}, 500);
+		}
+	});
+		
+	</script>
+	
+	
+<?php
+	$nr_indeksu = '164372';
+	$nrGrupy = '2';
+	
+	echo 'Autor: Dawid Grabowski '.$nr_indeksu.' grupa '.$nrGrupy.'<br/><br/>';
+?>
+	
+</body>
+</html>
