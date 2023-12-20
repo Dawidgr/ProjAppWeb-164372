@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 07 Gru 2023, 14:49
--- Wersja serwera: 10.4.24-MariaDB
--- Wersja PHP: 8.1.6
+-- Generation Time: Dec 20, 2023 at 09:48 PM
+-- Wersja serwera: 10.4.32-MariaDB
+-- Wersja PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,8 +18,31 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Baza danych: `moja_strona`
+-- Database: `moja_strona`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `kategorie`
+--
+
+CREATE TABLE `kategorie` (
+  `id` int(11) NOT NULL,
+  `matka` int(11) NOT NULL DEFAULT 0,
+  `nazwa` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `kategorie`
+--
+
+INSERT INTO `kategorie` (`id`, `matka`, `nazwa`) VALUES
+(1, 0, 'Owoce'),
+(2, 0, 'Warzywa'),
+(3, 1, 'Banan'),
+(5, 2, 'Ziemniak'),
+(7, 1, 'Mandarynka');
 
 -- --------------------------------------------------------
 
@@ -32,10 +55,10 @@ CREATE TABLE `page_list` (
   `page_title` varchar(255) NOT NULL,
   `page_content` text NOT NULL,
   `status` int(11) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Zrzut danych tabeli `page_list`
+-- Dumping data for table `page_list`
 --
 
 INSERT INTO `page_list` (`id`, `page_title`, `page_content`, `status`) VALUES
@@ -53,17 +76,29 @@ INSERT INTO `page_list` (`id`, `page_title`, `page_content`, `status`) VALUES
 --
 
 --
+-- Indeksy dla tabeli `kategorie`
+--
+ALTER TABLE `kategorie`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeksy dla tabeli `page_list`
 --
 ALTER TABLE `page_list`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT dla zrzuconych tabel
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT dla tabeli `page_list`
+-- AUTO_INCREMENT for table `kategorie`
+--
+ALTER TABLE `kategorie`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `page_list`
 --
 ALTER TABLE `page_list`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;

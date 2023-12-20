@@ -2,7 +2,7 @@
 
 class ZarzadzajKategoriami 
 {
-	private $conn;
+	public $conn;
 	
 	public function __construct($conn)
 	{
@@ -53,7 +53,7 @@ class ZarzadzajKategoriami
 			while ($row = $result->fetch_assoc())
 			{
 				echo $row['nazwa']. '
-                 <form class="inline" method="post">
+                 <form method="post" style="display: inline;">
                      <input type="hidden" name="action" value="kategorie_edytuj">
                      <input type="hidden" name="id" value="'.$row['id'].'">
                      <button type="submit">Edytuj</button>
@@ -78,12 +78,12 @@ class ZarzadzajKategoriami
 			while ($row = $result->fetch_assoc())
 			{	
 				echo str_repeat("&nbsp;&nbsp;", $level * 2) . "- " . $row['nazwa'] . '
-                 <form class="inline" method="post">
+                 <form method="post" style="display: inline;">
                      <input type="hidden" name="action" value="kategorie_edytuj">
                      <input type="hidden" name="id" value="'.$row['id'].'">
                      <button type="submit">Edytuj</button>
                  </form>
-				 <form class="inline" method="post">
+				 <form method="post" style="display: inline;">
                      <input type="hidden" name="action" value="kategorie_usun">
                      <input type="hidden" name="id" value="'.$row['id'].'">
                      <button type="submit">Usuń</button>

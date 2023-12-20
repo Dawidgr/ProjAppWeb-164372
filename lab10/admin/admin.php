@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="../css/mystyle.css">
-
 <?php
 session_start();
 
@@ -190,7 +188,7 @@ function ListaPodstron()
 		
 		echo '
             <form method="post" action="'.$_SERVER['REQUEST_URI'].'">
-                <input type="hidden" name="action" value="kategorie">
+                <input type="hidden" name="action" value="kategorie_lista">
                 <button type="submit">Zarządzaj Kategoriami</button>
             </form>
             ';
@@ -287,19 +285,121 @@ elseif($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usun_strone"]))
 		}
 }
 
-# Jeżeli jesteśmy zalogowani, wyświetla listę podstron
+
 if ($_SESSION['zalogowany'] === true) {
-	if(isset($_POST['action']) && $_POST['action'] === 'kategorie')
+	
+	$zarzadznieKategoriami = new ZarzadzajKategoriami($conn);
+	
+	if(isset($_POST['action']) && $_POST['action'] === 'kategorie_zapiszedycje')
 	{
-		$zarzadznieKategoriami = new ZarzadzajKategoriami($conn);
-		$zarzadznieKategoriami->PokazKategorie();
+		$id = $_POST['id'];
+		$nazwa = $_POST['nazwa'];
+		$matka = $_POST['matka'];
+		$zarzadznieKategoriami->EdytujKategorie($id, $nazwa, $matka);
+		echo 'Edycja zapisana pomyślnie.';
 	}
-	elseif(isset($_POST['action']) && $_POST['action'] === 'kategorie')
-	{	
+	elseif(isset($_POST['action']) && $_POST['action'] === 'kategorie_usunpotw')
+	{
+		$id = $_POST['id'];
+		$zarzadznieKategoriami->UsunKategorie($id);
+		echo 'Kategoria została usunięta pomyślnie.';
+	}
+	elseif(isset($_POST['action']) && $_POST['action'] === 'kategorie_nowazapisz')
+	{
+		$matka = $_POST['matka'];
+		$nazwa = $_POST['nazwa'];
+		$zarzadznieKategoriami->DodajKategorie($nazwa, $matka);
+		echo 'Nowa kategoria dodana pomyślnie.';
+	}
+	
+	if(isset($_POST['action']) && $_POST['action'] === 'kategorie_lista')
+	{
 		echo '
-		TUTAJ SKONCZYLEM
-		'
-</form>
+			<form method="post">
+				<input type="hidden" name="action" value="wróć">
+				<button type="submit">Wróć</button>
+			</form>
+
+			<form method="post">
+				<input type="hidden" name="action" value="kategorie_nowa">
+				<button type="submit">Dodaj nową kategorię</button>
+			</form>
+		';
+		
+		$zarzadznieKategoriami->PokazKategorie();
+		
+	}
+	elseif(isset($_POST['action']) && $_POST['action'] === 'kategorie_edytuj')
+	{
+		$kategoria_id = $_POST['id'];
+		
+		$query = "SELECT * FROM kategorie WHERE id = $kategoria_id LIMIT 1";
+		$query = $zarzadznieKategoriami->conn->real_escape_string($query);
+		$result = $zarzadznieKategoriami->conn->query($query);
+		$row = $result->fetch_assoc();
+		
+		echo '
+			<form method="post" action="'.$_SERVER['REQUEST_URI'].'">
+				<input type="hidden" name="action" value="kategorie_zapiszedycje">
+				<input type="hidden" name="id" value="'. $row['id'] .'">
+				
+				<label for="matka">Matka:</label>
+				<input type="text" name="matka" value="'. $row['matka'] .'">
+				
+				<label for="nazwa">Nazwa:</label>
+				<input type="text" name="nazwa" value="'. $row['nazwa'] .'">
+				
+				<input type="submit" value="Zapisz zmiany">
+			</form>
+			
+			<form method="post">
+				<input type="hidden" name="action" value="wróć">
+				<button type="submit">Wróć</button>
+			</form>			
+		';
+	}
+	elseif(isset($_POST['action']) && $_POST['action'] === 'kategorie_usun')
+	{
+		$kategoria_id = $_POST['id'];
+		
+		$query = "SELECT * FROM kategorie WHERE id = $kategoria_id LIMIT 1";
+		$query = $zarzadznieKategoriami->conn->real_escape_string($query);
+		$result = $zarzadznieKategoriami->conn->query($query);
+		$row = $result->fetch_assoc();
+		
+		echo 'Czy na pewno chcesz usunąć kategorię '. $row['nazwa'] .'?
+			<form method="post" action="'.$_SERVER['REQUEST_URI'].'">
+				<input type="hidden" name="id" value="' . $row['id'] . '">
+                <input type="hidden" name="action" value="kategorie_usunpotw">
+                <button type="submit" name="usun_kategorie">Usuń kategorię</button>
+            </form>
+		
+		<form method="post">
+            <input type="hidden" name="action" value="wróć">
+            <button type="submit">Wróć</button>
+        </form>
+		';
+	}
+	elseif(isset($_POST['action']) && $_POST['action'] === 'kategorie_nowa')
+	{
+		echo '
+			<form method="post" action="'.$_SERVER['REQUEST_URI'].'">
+				<input type="hidden" name="action" value="kategorie_nowazapisz">
+				
+				<label for="matka">Matka:</label>
+				<input type="text" name="matka">
+				
+				<label for="nazwa">Nazwa:</label>
+				<input type="text" name="nazwa">
+				
+				<input type="submit" value="Dodaj">
+			</form>
+			
+			<form method="post">
+				<input type="hidden" name="action" value="wróć">
+				<button type="submit">Wróć</button>
+			</form>			
+		';
 	}
 	else 
 	{
