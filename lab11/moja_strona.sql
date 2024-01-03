@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 20, 2023 at 09:48 PM
+-- Generation Time: Sty 04, 2024 at 12:35 AM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -38,11 +38,11 @@ CREATE TABLE `kategorie` (
 --
 
 INSERT INTO `kategorie` (`id`, `matka`, `nazwa`) VALUES
-(1, 0, 'Owoce'),
-(2, 0, 'Warzywa'),
-(3, 1, 'Banan'),
-(5, 2, 'Ziemniak'),
-(7, 1, 'Mandarynka');
+(9, 0, 'Elektronika'),
+(10, 9, 'Telefony'),
+(11, 9, 'Konsole'),
+(12, 0, 'Moda'),
+(13, 12, 'Koszulki');
 
 -- --------------------------------------------------------
 
@@ -71,6 +71,40 @@ INSERT INTO `page_list` (`id`, `page_title`, `page_content`, `status`) VALUES
 (7, 'kontakt', '<h1>Kontakt</h1>\r\n<form action=\"mailto:jakismail@przyklad.pl\" method=\"post\" enctype=\"text/plain\">\r\n		Imie i Nazwisko:\r\n		<br>\r\n		<input type=\"text\" name=\"name\">\r\n		<br>\r\n		E-mail:\r\n		<br>\r\n		<input type=\"text\" name=\"mail\">\r\n		<br>\r\n		Wiadomość:\r\n		<br>\r\n		<textarea id=\"message\" name=\"message\" rows=\"4\" required></textarea>\r\n		<br>\r\n		<input type=\"submit\" value=\"Wyślij\">\r\n		<input type=\"reset\" value=\"Zresetuj\">\r\n</form>\r\n', 1),
 (8, 'glowna', '<h1>Filmy Oscarowe</h1>\n\n<table>\n    <tr>\n        <td>\n            <p><a href=\"index.php?idp=wszystkowszedzienaraz\"><i><b>Wszystko wszędzie naraz</b></i></a></p>\n			<p><br>Najlepszy film</p>\n			<div id=\"moveout\" class=\"film\"><a href=\"index.php?idp=wszystkowszedzienaraz\"><img src=\"img/wszystkowszedzienaraz.jpg\" class=\"img1\" alt=\"Wszystko wszędzie naraz plakat\"></a></div>\n        </td>\n	</tr>	\n	<tr>\n        <td>\n            <p><a href=\"index.php?idp=womentalking\"><i><b>Women Talking</b></i></a></p>\n			<p><br>Najlepszy scenariusz adaptowany</p>\n			<div id=\"moveout\" class=\"film\"><a href=\"index.php?idp=womentalking\"><img src=\"img/womentalking.jpg\" class=\"img1\" alt=\"Women Talking plakat\"></a></div>\n        </td>\n    </tr>\n    <tr>\n        <td>\n            <p><a href=\"index.php?idp=zakliaczesloni\"><i><b>Zaklinacze Słoni</b></i></a></p>\n			<p><br>Najlepszy krótkometrażowy film dokumentalny</p>\n			<div id=\"moveout\" class=\"film\"><a href=\"index.php?idp=zakliaczesloni\"><img src=\"img/zaklinaczesloni.jpg\" class=\"img1\" alt=\"Zaklinacze Słoni plakat\"></a></div>\n        </td>\n	</tr>	\n	<tr>\n        <td>\n            <p><a href=\"index.php?idp=wieloryb\"><i><b>Wieloryb</b></i></a></p>\n			<p><br>Najlepszą charakteryzację i fryzury</p>\n			<div id=\"moveout\" class=\"film\"><a href=\"index.php?idp=wieloryb\"><img src=\"img/wieloryb.jpg\" class=\"img1\" alt=\"Wieloryb plakat\"></a></div>\n        </td>\n    </tr>\n</table>\n\n<u>\n	<p>\n		<b>\n			<i>\n				<h3>\n					<span style=\"color:red\">Źródło informacji: <a href=\"https://www.filmweb.pl/awards/Oscary/2023\">Filmweb.pl</a></span>\n				</h3>\n			</i>\n		</b>\n	</p>\n</u>\n	<!-- Powiekszenie obrazu po najechaniu kursorem -->\n	<script>\n	$(\"#moveout img\").on({\n		\"mouseover\" : function() {\n			$(this).animate({\n				width: \"350px\",\n			}, 500);\n		},\n		\"mouseout\" : function() {\n			$(this).animate({\n				width: \"300px\",\n			}, 500);\n		}\n	});\n		\n	</script>\n	\n</body>\n</html>\n', 1);
 
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `produkty`
+--
+
+CREATE TABLE `produkty` (
+  `id` int(11) NOT NULL,
+  `tytul` varchar(255) NOT NULL,
+  `opis` text NOT NULL,
+  `data_utworzenia` datetime NOT NULL,
+  `data_modyfikacji` datetime NOT NULL,
+  `data_wygasniecia` date NOT NULL,
+  `cena_netto` decimal(11,2) NOT NULL,
+  `podatek_vat` decimal(3,2) NOT NULL,
+  `ilosc_dostepnych_sztuk` int(11) NOT NULL,
+  `status_dostepnosci` tinyint(1) NOT NULL,
+  `kategoria` int(11) NOT NULL,
+  `gabaryt_produktu` varchar(255) NOT NULL,
+  `zdjecie` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `produkty`
+--
+
+INSERT INTO `produkty` (`id`, `tytul`, `opis`, `data_utworzenia`, `data_modyfikacji`, `data_wygasniecia`, `cena_netto`, `podatek_vat`, `ilosc_dostepnych_sztuk`, `status_dostepnosci`, `kategoria`, `gabaryt_produktu`, `zdjecie`) VALUES
+(1, 'Smartphone XYZ', 'Nowoczesny telefon.', '2024-01-03 21:55:24', '2024-01-03 21:55:24', '2024-01-03', 799.99, 0.23, 100, 1, 10, '145 x 70 x 8 mm', 'produkty/smartphonexyz.jpg'),
+(2, 'Koszulka XYZ', 'Stylowa koszulka.', '2024-01-03 22:04:30', '2024-01-03 22:04:30', '2024-04-09', 89.99, 0.23, 250, 1, 13, 'XL', 'produkty/koszulkaxyz.jpg'),
+(3, 'Konsola XYZ', 'Przenośna konsola do gier.', '2024-01-03 22:06:23', '2024-01-03 22:06:23', '2024-03-17', 1599.99, 0.23, 75, 1, 11, '‎18 x 19,8 x 18 cm', 'produkty/konsolaxyz.jpg'),
+(4, 'test tytul', 'test opis', '2024-01-03 22:52:47', '2024-01-03 22:52:47', '2023-03-03', 34.32, 0.23, 150, 1, 10, 'test gabaryty', 'produkty/testzdjecie.jpg'),
+(5, 'test tytul1', 'test opis', '2024-01-03 22:53:05', '2024-01-03 22:53:05', '2023-03-03', 34.32, 0.23, 150, 1, 10, '', 'produkty/testzdjecie.jpg'),
+(6, 'test tytul2', 'test opis', '2024-01-03 22:53:13', '2024-01-03 22:53:13', '2023-03-03', 34.32, 0.23, 150, 1, 10, '', 'produkty/testzdjecie.jpg');
+
 --
 -- Indeksy dla zrzutów tabel
 --
@@ -88,6 +122,12 @@ ALTER TABLE `page_list`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeksy dla tabeli `produkty`
+--
+ALTER TABLE `produkty`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -95,13 +135,29 @@ ALTER TABLE `page_list`
 -- AUTO_INCREMENT for table `kategorie`
 --
 ALTER TABLE `kategorie`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `page_list`
 --
 ALTER TABLE `page_list`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `produkty`
+--
+ALTER TABLE `produkty`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `produkty`
+--
+ALTER TABLE `produkty`
+  ADD CONSTRAINT `fk_kategoria` FOREIGN KEY (`kategoria`) REFERENCES `kategorie` (`id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
