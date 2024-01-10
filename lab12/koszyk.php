@@ -126,7 +126,7 @@ function PokazProdukty()
                     <form method="post" style="display: inline;">
                         <input type="hidden" name="action" value="koszyk_dodaj">
                         <input type="hidden" name="id" value="' . $row['id'] . '">
-                        <input type="number" name="ilosc" min="1" max="' . $row['ilosc_dostepnych_sztuk'] . '"> szt.
+                        <input type="number" name="ilosc" value="1" min="1" max="' . $row['ilosc_dostepnych_sztuk'] . '"> szt.
                         <button type="submit">Dodaj do koszyka</button>
                     </form>
                   </div><br>';

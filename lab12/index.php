@@ -19,6 +19,7 @@
 			<li> <a href="index.php?idp=kontakt">Kontakt</a> </li>
 			<li> <a href="index.php?idp=skrypty">Skrypty </a> </li>
 			<li> <a href="index.php?idp=filmy">Filmy</a> </li>
+			<li> <a href="koszyk.php">Produkty</a> </li>
 		</b>
 	</ul>
 <?php
